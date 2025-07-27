@@ -1,0 +1,48 @@
+@model CalculateMonthlyLoanPaymentsRequest
+
+<div class="container col-xl-6 mx-auto mt-5">
+    <h2 class="mb-4">Калькулятор аннуитетных платежей (по месяцам)</h2>
+    <form method="post" class="row g-2">
+        <div class="col-sm-4">
+            <label asp-for="Amount" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="Amount" value="@Model.Amount"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">руб.</span>
+            </div>
+            <span asp-validation-for="Amount" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="TermInMonths" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="TermInMonths" value="@Model.TermInMonths"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">мес.</span>
+            </div>
+            <span asp-validation-for="TermInMonths" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="AnnualInterestRatePercentage" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="AnnualInterestRatePercentage" value="@Model.AnnualInterestRatePercentage"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">% в год</span>
+            </div>
+            <span asp-validation-for="AnnualInterestRatePercentage" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            @Html.ActionLink("Калькулятор по дням", "CalculateDailyPayments")
+            <div class="d-flex gap-2">
+                <input type="reset" class="btn btn-outline-danger" value="Сбросить"/>
+                <input type="submit" class="btn btn-primary" value="Рассчитать платежи"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

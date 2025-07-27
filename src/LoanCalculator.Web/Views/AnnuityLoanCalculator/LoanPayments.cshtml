@@ -1,0 +1,37 @@
+@model LoanCalculator.Application.Models.CalculateLoanPaymentsResponse
+
+<div class="container mx-auto mt-5">
+    <div class="d-flex gap-4 justify-content-between mb-4 align-items-center">
+        <h2>Аннуитетные платежи по займу</h2>
+        <button class="btn btn-outline-primary" onclick="history.go(-1)">Вернуться к калькулятору</button>
+    </div>
+    <table class="table table-bordered table-striped table-sm text-center">
+        <thead class="table-light">
+        <tr>
+            <th>№</th>
+            <th>Дата платежа</th>
+            <th>Сумма платежа</th>
+            <th>Размер платежа по телу</th>
+            <th>Размер платежа по %</th>
+            <th>Остаток основного долга</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var (payment, paymentNumber) in Model.Payments.Select((payment, i) => (payment, i + 1)))
+        {
+            <tr>
+                <td>@paymentNumber</td>
+                <td>@Html.DisplayFor(_ => payment.Date)</td>
+                <td>@Html.DisplayFor(_ => payment.TotalPaymentAmount)</td>
+                <td>@Html.DisplayFor(_ => payment.PrincipalPaymentAmount)</td>
+                <td>@Html.DisplayFor(_ => payment.InterestPaymentAmount)</td>
+                <td>@Html.DisplayFor(_ => payment.OutstandingPrincipalPaymentAmount)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <p class="fs-5">
+        Переплата по процентам: @Html.DisplayFor(model => model.OverpaymentAmount) руб.<br/>
+        Общая стоимость кредита: @Html.DisplayFor(model => model.TotalPaymentAmount) руб.
+    </p>
+</div>

@@ -1,0 +1,58 @@
+@model CalculateDailyLoanPaymentsRequest
+
+<div class="container col-xl-6 mx-auto mt-5">
+    <h2 class="mb-4">Калькулятор аннуитетных платежей (по дням)</h2>
+    <form id="calculatePaymentsForm" method="post" class="row g-2">
+        <div class="col-sm-6 col-lg-3">
+            <label asp-for="Amount" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="Amount" value="@Model.Amount"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">руб.</span>
+            </div>
+            <span asp-validation-for="Amount" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <label asp-for="TermInDays" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="TermInDays" value="@Model.TermInDays"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">дн.</span>
+            </div>
+            <span asp-validation-for="TermInDays" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <label asp-for="DailyInterestRatePercentage" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="DailyInterestRatePercentage" value="@Model.DailyInterestRatePercentage"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">% в день</span>
+            </div>
+            <span asp-validation-for="DailyInterestRatePercentage" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <label asp-for="PaymentStepInDays" class="form-label"></label>
+            <div class="input-group">
+                <input type="number" asp-for="PaymentStepInDays" value="@Model.PaymentStepInDays"
+                       class="form-control text-end"
+                       data-val-number="Укажите число." required/>
+                <span class="input-group-text">дн.</span>
+            </div>
+            <span asp-validation-for="PaymentStepInDays" class="invalid-feedback d-block"></span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            @Html.ActionLink("Калькулятор по месяцам", "CalculateMonthlyPayments")
+            <div class="d-flex gap-2">
+                <input type="reset" class="btn btn-outline-danger" value="Сбросить"/>
+                <input type="submit" class="btn btn-primary" value="Рассчитать платежи"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

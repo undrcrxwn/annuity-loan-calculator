@@ -1,9 +1,11 @@
 using LoanCalculator.Application;
 using LoanCalculator.Domain;
+using LoanCalculator.Web.Validation;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddSingleton<IValidationAttributeAdapterProvider, LessThanOrEqualToAttributeAdapterProvider>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDomainServices();
 builder.Services.AddApplicationServices();

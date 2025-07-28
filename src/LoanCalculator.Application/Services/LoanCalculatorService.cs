@@ -33,7 +33,7 @@ public class LoanCalculatorService(ILoanPaymentCalculator loanPaymentCalculator)
             Until = today.AddDays(request.TermInDays),
             Amount = request.Amount,
             PaymentInterval = new DailyPaymentInterval(request.PaymentStepInDays),
-            InterestRatePerPaymentInterval = request.DailyInterestRatePercentage / 100,
+            InterestRatePerPaymentInterval = request.DailyInterestRatePercentage * request.PaymentStepInDays / 100,
         };
 
         var payments = loanPaymentCalculator.CalculatePayments(loan);

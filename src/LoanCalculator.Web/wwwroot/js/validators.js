@@ -1,6 +1,6 @@
 $.validator.addMethod("less-than-or-equal-to", function (value, element, param) {
     const otherValue = $(param).val();
-    return !value || !otherValue || value <= otherValue;
+    return !value || !otherValue || parseFloat(value) <= parseFloat(otherValue);
 }, "The value must be less than or equal to the specified field.");
 
 $.validator.unobtrusive.adapters.add("less-than-or-equal-to", ["other"], (options) => {

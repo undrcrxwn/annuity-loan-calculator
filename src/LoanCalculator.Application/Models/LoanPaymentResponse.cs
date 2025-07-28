@@ -5,7 +5,7 @@ namespace LoanCalculator.Application.Models;
 
 public class LoanPaymentResponse
 {
-    [DisplayFormat(DataFormatString = "{0:D}")]
+    [DisplayFormat(DataFormatString = "{0:d MMMM yyyy г.}")]
     public required DateOnly Date { get; set; }
 
     /// <summary>Размер платежа по телу</summary>
